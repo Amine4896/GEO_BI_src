@@ -1,0 +1,18 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary & cache files
+.DS_Store
+Thumbs.db
+__MACOSX/
+docs/rapport_tp1_geobi_tmp.html
+
+# Visual Studio / SSIS user options
+.vs/
+*.suo
+*.user
+*.dtlog
+GeoBI_TP1_SSIS/bin/
+GeoBI_TP1_SSIS/obj/

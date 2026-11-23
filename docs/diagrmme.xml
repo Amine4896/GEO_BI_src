@@ -1,0 +1,57 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Modele_GeoBI_TP1" id="geobi_tp1_diag">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- REGION -->
+        <mxCell id="tbl_region" value="&lt;b&gt;region&lt;/b&gt;&lt;hr&gt;+ id : int [PK]&lt;br&gt;+ code : nvarchar(10)&lt;br&gt;+ nom : nvarchar(100)&lt;br&gt;+ geom : geometry" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="40" width="180" height="110" as="geometry" />
+        </mxCell>
+        <!-- PROVINCE -->
+        <mxCell id="tbl_province" value="&lt;b&gt;province_prefecture&lt;/b&gt;&lt;hr&gt;+ id : int [PK]&lt;br&gt;+ code : nvarchar(15)&lt;br&gt;+ nom : nvarchar(100)&lt;br&gt;+ type : nvarchar(20)&lt;br&gt;+ region_id : int [FK]&lt;br&gt;+ geom : geometry" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="40" width="200" height="140" as="geometry" />
+        </mxCell>
+        <!-- CERCLE -->
+        <mxCell id="tbl_cercle" value="&lt;b&gt;cercle&lt;/b&gt;&lt;hr&gt;+ id : int [PK]&lt;br&gt;+ code : nvarchar(20)&lt;br&gt;+ nom : nvarchar(100)&lt;br&gt;+ type : nvarchar(40)&lt;br&gt;+ province_prefecture_id : int [FK]" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="40" width="220" height="120" as="geometry" />
+        </mxCell>
+        <!-- COMMUNE -->
+        <mxCell id="tbl_commune" value="&lt;b&gt;commune&lt;/b&gt;&lt;hr&gt;+ id : int [PK]&lt;br&gt;+ code : nvarchar(25)&lt;br&gt;+ nom : nvarchar(150)&lt;br&gt;+ type : nvarchar(20)&lt;br&gt;+ region_id : int [FK]&lt;br&gt;+ province_prefecture_id : int [FK]&lt;br&gt;+ cercle_id : int [FK, Nullable]&lt;br&gt;+ geom : geometry" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="270" width="220" height="180" as="geometry" />
+        </mxCell>
+        <!-- STAT COMMUNE -->
+        <mxCell id="tbl_stat_commune" value="&lt;b&gt;stat_commune&lt;/b&gt;&lt;hr&gt;+ id : int [PK]&lt;br&gt;+ commune_id : int [FK, Unique]&lt;br&gt;+ menages : int&lt;br&gt;+ population : int&lt;br&gt;+ etrangers : int&lt;br&gt;+ marocains : int" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="270" width="200" height="140" as="geometry" />
+        </mxCell>
+        <!-- CENTRE URBAIN -->
+        <mxCell id="tbl_centre" value="&lt;b&gt;centre_urbain&lt;/b&gt;&lt;hr&gt;+ id : int [PK]&lt;br&gt;+ code : nvarchar(30)&lt;br&gt;+ nom : nvarchar(150)&lt;br&gt;+ commune_id : int [FK]" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="270" width="190" height="110" as="geometry" />
+        </mxCell>
+        <!-- STAT CENTRE URBAIN -->
+        <mxCell id="tbl_stat_centre" value="&lt;b&gt;stat_centre_urbain&lt;/b&gt;&lt;hr&gt;+ id : int [PK]&lt;br&gt;+ centre_urbain_id : int [FK, Unique]&lt;br&gt;+ menages : int&lt;br&gt;+ population : int&lt;br&gt;+ etrangers : int&lt;br&gt;+ marocains : int" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="930" y="270" width="210" height="140" as="geometry" />
+        </mxCell>
+        <!-- EDGES -->
+        <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="tbl_region" target="tbl_province">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="tbl_province" target="tbl_cercle">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="tbl_province" target="tbl_commune">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="tbl_commune" target="tbl_stat_commune">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="tbl_commune" target="tbl_centre">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="tbl_centre" target="tbl_stat_centre">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
